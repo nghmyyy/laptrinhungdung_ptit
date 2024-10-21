@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/txtDa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtAddTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="Thêm giao dịch"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radBtnInOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:animateLayoutChanges="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/txtAddTransaction"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtAddTransaction"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddTransaction">
+
+
+        <RadioButton
+            android:id="@+id/radBtnIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:text="THU"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/radBtnOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:text="CHI"
+            android:textSize="14sp" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/txtAddCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Chủ đề "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radBtnInOut" />
+
+    <Spinner
+        android:id="@+id/spinnerCat"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/txtAddCat"
+        app:layout_constraintTop_toBottomOf="@+id/radBtnInOut" />
+
+    <TextView
+        android:id="@+id/txtAddAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Số tiền"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/txtAddCat"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddCat" />
+
+    <EditText
+        android:id="@+id/edTxtAddAmount"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Nhập số tiền"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerCat"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtAddAmount"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCat" />
+
+    <EditText
+        android:id="@+id/edTxtAddDate"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="Chọn ngày"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/edTxtAddAmount"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/txtAddDate"
+        app:layout_constraintTop_toBottomOf="@+id/edTxtAddAmount" />
+
+    <TextView
+        android:id="@+id/txtAddDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="40dp"
+        android:text="Ngày"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/txtAddAmount"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddAmount" />
+
+    <TextView
+        android:id="@+id/txtAddNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Note"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/txtAddDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddDate" />
+
+    <EditText
+        android:id="@+id/edTxtAddNote"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Nhập note"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/edTxtAddDate"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/txtAddNote"
+        app:layout_constraintTop_toBottomOf="@+id/edTxtAddDate" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Thêm giao dịch"
+        app:layout_constraintEnd_toEndOf="@+id/edTxtAddNote"
+        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintStart_toStartOf="@+id/txtAddNote"
+        app:layout_constraintTop_toBottomOf="@+id/edTxtAddNote" />
+
+    <ImageView
+        android:id="@+id/imgDot"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/dots"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerCat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCat"
+        app:layout_constraintTop_toTopOf="@+id/spinnerCat"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/btnAddCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Thêm danh mục"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/imgDot"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imgDot"
+        app:layout_constraintTop_toBottomOf="@+id/imgDot" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
