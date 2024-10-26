@@ -3,9 +3,12 @@ package com.map.nguyen_ha_my.bt2_lancuoi.activity
 import android.content.Intent
 import java.util.Calendar
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
@@ -25,6 +28,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var listTransaction: ListView
     private lateinit var btnAddTransaction: Button
     private lateinit var imgCalendar: ImageView
+    private lateinit var imgMenu: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,14 +58,15 @@ class MainActivity : ComponentActivity() {
             startActivity(intent)
         }
 
-
-
         // Sự kiện cho imgCalendar
         imgCalendar.setOnClickListener {
             val intent = Intent(this, MaterialCalendarViewAct::class.java)
             startActivity(intent)
         }
 
+        imgMenu.setOnClickListener{
+            view -> showPopupMenu(view)
+        }
 
     }
 
@@ -73,6 +78,7 @@ class MainActivity : ComponentActivity() {
         listTransaction = findViewById(R.id.listTransaction)
         btnAddTransaction = findViewById(R.id.btnAddTransaction)
         imgCalendar = findViewById(R.id.imgCalendar)
+        imgMenu = findViewById(R.id.imgMenu)
     }
 
     private fun setCurrentDate() {
@@ -104,21 +110,30 @@ class MainActivity : ComponentActivity() {
         val getTotalSumOut = sqlHelper.getSumOfOutByDate(date)
         txtSumOut.text = getTotalSumOut.toString()
     }
-
-    private fun updateUIWithSelectedDate(selectedDate: Date) {
-        val formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        textDate.text = formatDate.format(selectedDate)
-
-        setCurrentSum()
-        setCurrentSumIn()
-        setCurrentSumOut()
-
-        updateTransactionList(selectedDate)
-    }
-
     private fun updateTransactionList(date: Date) {
         val transactionWithInOuts = sqlHelper.getTransactionByDate(date)
         val adapter = TransactionAdapter(this, transactionWithInOuts)
         listTransaction.adapter = adapter
+    }
+
+    private fun showPopupMenu(view: View){
+        val popupMenu = PopupMenu(this, view)
+        popupMenu.menuInflater.inflate(R.menu.statistical_menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener{ item: MenuItem ->
+            when(item.itemId){
+                R.id.itm_cat -> {
+                    val intent = Intent(this, charCatAct::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.itm_cat -> {
+                    val intent = Intent(this, charTimeAct::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
 }

@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toStartOf="@+id/txtSumOut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSum"
-        app:layout_constraintWidth_percent="0.4"/>
+        app:layout_constraintWidth_percent="0.4" />
 
     <!-- Tổng tiền ra -->
     <TextView
@@ -104,5 +104,19 @@
         android:src="@drawable/calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textDate" />
+
+    <ImageView
+        android:id="@+id/imgMenu"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="18dp"
+        android:clickable="true"
+        android:src="@drawable/menu"
+        app:layout_constraintBottom_toTopOf="@+id/txtSumIn"
+        app:layout_constraintEnd_toStartOf="@+id/textDate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtSumIn"
+        app:layout_constraintTop_toTopOf="@+id/textDate"
+        app:layout_constraintVertical_bias="0.242" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
