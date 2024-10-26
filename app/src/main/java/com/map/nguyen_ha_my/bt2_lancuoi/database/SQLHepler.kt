@@ -167,10 +167,6 @@ class SQLHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         return categoryId // Trả về ID của danh mục vừa tạo
     }
 
-
-
-
-
     object CatInOutTable {
         const val TABLE_NAME = "CatInOut"
         const val COLUMN_ID = "id"
@@ -410,6 +406,32 @@ class SQLHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         val transactionId = db.insert(TransactionTable.TABLE_NAME, null, valuesTransaction)
         db.close()
         return transactionId // Trả về ID của giao dịch vừa tạo
+    }
+    fun getTransactionDates(): List<Date> {
+        val dates = mutableListOf<Date>()
+        val db = this.readableDatabase
+
+        val query = """
+            SELECT DISTINCT ${TransactionTable.COLUMN_DATE}
+            FROM ${TransactionTable.TABLE_NAME}
+        """.trimIndent()
+
+        val cursor = db.rawQuery(query, null)
+        val formatDate = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+
+        if (cursor.moveToFirst()) {
+            do {
+                val dateString = cursor.getString(cursor.getColumnIndexOrThrow(TransactionTable.COLUMN_DATE))
+                val date = formatDate.parse(dateString)
+                date?.let { dates.add(it) }
+            } while (cursor.moveToNext())
+        } else {
+            Log.e("getTransactionDates", "No dates found in TransactionTable")
+        }
+
+        cursor.close()
+        db.close()
+        return dates
     }
 
 

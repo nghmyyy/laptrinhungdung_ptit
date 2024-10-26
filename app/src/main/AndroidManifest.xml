@@ -25,6 +25,7 @@
 
         <activity android:name=".activity.AddTransactionActivity" />
         <activity android:name=".activity.AddCatAct" />
+        <activity android:name=".activity.MaterialCalendarViewAct"/>
     </application>
 
 </manifest>

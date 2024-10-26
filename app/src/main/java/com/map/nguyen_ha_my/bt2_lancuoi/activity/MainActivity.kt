@@ -1,28 +1,17 @@
 package com.map.nguyen_ha_my.bt2_lancuoi.activity
 
 import android.content.Intent
-import android.icu.util.Calendar
+import java.util.Calendar
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.map.nguyen_ha_my.bt2_lancuoi.R
 import com.map.nguyen_ha_my.bt2_lancuoi.adapter.TransactionAdapter
 import com.map.nguyen_ha_my.bt2_lancuoi.database.SQLHelper
-import com.map.nguyen_ha_my.bt2_lancuoi.model.Transaction
-import com.map.nguyen_ha_my.bt2_lancuoi.model.TransactionWithInOut
-import com.map.nguyen_ha_my.bt2_lancuoi.ui.theme.Bt2_lancuoiTheme
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -34,8 +23,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var txtSumIn: TextView
     private lateinit var txtSumOut: TextView
     private lateinit var listTransaction: ListView
-    private lateinit var transactions: List<Transaction>
     private lateinit var btnAddTransaction: Button
+    private lateinit var imgCalendar: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,29 +32,37 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.main)
         initView()
 
-        //gọi database
+        // Khởi tạo SQLHelper
         sqlHelper = SQLHelper(this)
 
-        //setDate cho textDate
+        // Set Date cho textDate
         setCurrentDate()
 
-        //setSum cho textSum
+        // Set Sum cho txtSum
         setCurrentSum()
 
-        //setSumIn cho txtSumIn, setSumOut cho txtSumOut
+        // Set SumIn cho txtSumIn, setSumOut cho txtSumOut
         setCurrentSumIn()
         setCurrentSumOut()
 
         // Set ListView
-        val transactionWithInOuts = sqlHelper.getTransactionByDate(Date()) // Chỉ lấy danh sách Transaction
-        val adapter = TransactionAdapter(this, transactionWithInOuts) // Vẫn sử dụng TransactionAdapter
-        listTransaction.adapter = adapter
+        updateTransactionList(Date())
 
-        //setIntent cho btnAdd
+        // Set Intent cho btnAdd
         btnAddTransaction.setOnClickListener {
             val intent = Intent(this, AddTransactionActivity::class.java)
             startActivity(intent)
         }
+
+
+
+        // Sự kiện cho imgCalendar
+        imgCalendar.setOnClickListener {
+            val intent = Intent(this, MaterialCalendarViewAct::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     private fun initView() {
@@ -75,6 +72,7 @@ class MainActivity : ComponentActivity() {
         txtSumOut = findViewById(R.id.txtSumOut)
         listTransaction = findViewById(R.id.listTransaction)
         btnAddTransaction = findViewById(R.id.btnAddTransaction)
+        imgCalendar = findViewById(R.id.imgCalendar)
     }
 
     private fun setCurrentDate() {
@@ -84,7 +82,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun setCurrentSum() {
-        //lay Date tu textDate
         val dateString = textDate.text.toString()
         val formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val date: Date = formatDate.parse(dateString) ?: Date()
@@ -106,5 +103,22 @@ class MainActivity : ComponentActivity() {
         val date: Date = formatDate.parse(dateString) ?: Date()
         val getTotalSumOut = sqlHelper.getSumOfOutByDate(date)
         txtSumOut.text = getTotalSumOut.toString()
+    }
+
+    private fun updateUIWithSelectedDate(selectedDate: Date) {
+        val formatDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        textDate.text = formatDate.format(selectedDate)
+
+        setCurrentSum()
+        setCurrentSumIn()
+        setCurrentSumOut()
+
+        updateTransactionList(selectedDate)
+    }
+
+    private fun updateTransactionList(date: Date) {
+        val transactionWithInOuts = sqlHelper.getTransactionByDate(date)
+        val adapter = TransactionAdapter(this, transactionWithInOuts)
+        listTransaction.adapter = adapter
     }
 }

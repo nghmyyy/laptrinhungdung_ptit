@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <!-- Ẩn thông báo ban đầu -->
-
+    <!-- Ngày hiện tại -->
     <TextView
         android:id="@+id/textDate"
         android:layout_width="wrap_content"
@@ -16,71 +15,94 @@
         android:layout_marginTop="50dp"
         android:text="Ngày hiện tại"
         android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtSum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Tổng thu chi -->
     <TextView
         android:id="@+id/txtSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Tổng thu chi"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textDate"
-        app:layout_constraintHorizontal_bias="0.587"
         app:layout_constraintStart_toStartOf="@+id/textDate"
         app:layout_constraintTop_toBottomOf="@+id/textDate" />
 
+    <!-- ListView để hiển thị giao dịch -->
+
+    <!-- CalendarView để chọn ngày -->
+
     <ListView
         android:id="@+id/listTransaction"
-        android:layout_width="285dp"
-        android:layout_height="348dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="304dp"
+        android:layout_height="395dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtSumOut"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/txtSumIn"
         app:layout_constraintTop_toBottomOf="@+id/txtSumOut" />
 
+
+
+    <!-- Nút thêm giao dịch -->
     <Button
         android:id="@+id/btnAddTransaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="44dp"
         android:text="Thêm giao dịch"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/listTransaction"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="@+id/listTransaction"
-        app:layout_constraintTop_toBottomOf="@+id/listTransaction"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <!-- Tổng tiền vào -->
     <TextView
         android:id="@+id/txtSumIn"
-        android:layout_width="70dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
         android:background="#8C9EFF"
         android:gravity="center"
         android:text="SUM IN"
         android:textColor="#00ED12"
+        app:layout_constraintEnd_toStartOf="@+id/txtSumOut"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSum" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSum"
+        app:layout_constraintWidth_percent="0.4"/>
 
+    <!-- Tổng tiền ra -->
     <TextView
         android:id="@+id/txtSumOut"
-        android:layout_width="75dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
         android:background="#8C9EFF"
         android:gravity="center"
         android:text="SUM OUT"
         android:textColor="#B71C1C"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.614"
         app:layout_constraintStart_toEndOf="@+id/txtSumIn"
-        app:layout_constraintTop_toBottomOf="@+id/txtSum" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSum"
+        app:layout_constraintWidth_percent="0.4"/>
+
+    <!-- Biểu tượng lịch -->
+    <ImageView
+        android:id="@+id/imgCalendar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="28dp"
+        android:clickable="true"
+        android:src="@drawable/calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
